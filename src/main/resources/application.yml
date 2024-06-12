@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: CleanArch
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/cleanarch
+
+mcb:
+  client:
+    address:
+      url: 'http"://localhost:8082/addresses'
+      

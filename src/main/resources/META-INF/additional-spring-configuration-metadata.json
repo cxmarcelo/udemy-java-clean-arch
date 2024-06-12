@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "mcb.client.address.url",
+  "type": "java.lang.String",
+  "description": "A description for 'mcb.client.address.url'"
+}]}
