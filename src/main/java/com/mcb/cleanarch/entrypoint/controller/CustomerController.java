@@ -5,6 +5,7 @@ import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mcb.cleanarch.core.usecase.DeleteCustomerByIdUseCase;
 import com.mcb.cleanarch.core.usecase.FindCustomerByIdUseCase;
 import com.mcb.cleanarch.core.usecase.InsertCustomerUseCase;
 import com.mcb.cleanarch.core.usecase.UpdateCustomerUseCase;
@@ -31,6 +33,10 @@ public class CustomerController {
 
 	@Autowired
 	private UpdateCustomerUseCase updateCustomerUseCase;
+
+	@Autowired
+	private DeleteCustomerByIdUseCase deleteCustomerByIdUseCase;
+
 
 	@Autowired
 	private CustomerMapper customerMapper;
@@ -54,6 +60,12 @@ public class CustomerController {
 		var customer = customerMapper.toCustomer(customerRequest);
 		customer.setId(id);
 		updateCustomerUseCase.update(customer, customerRequest.getZipCode());
+		return ResponseEntity.noContent().build();
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> delete(@PathParam("id") String id) {
+		deleteCustomerByIdUseCase.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 
